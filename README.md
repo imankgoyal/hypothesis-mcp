@@ -9,10 +9,10 @@ MCP server for the [Hypothesis](https://hypothes.is) annotation service. Gives C
 ```bash
 # 1. Get your API key: https://hypothes.is/account/developer
 # 2. Run this in Claude Code:
-claude mcp add hypothesis -e HYPOTHESIS_API_KEY=your-key-here -- uvx hypothesis-mcp
+claude mcp add hypothesis -e HYPOTHESIS_API_KEY=your-key-here -- uvx --from git+https://github.com/imankgoyal/hypothesis-mcp hypothesis-mcp
 ```
 
-That's it — no cloning, no venv, no config files.
+That's it — no cloning, no venv, no config files. Requires [uv](https://docs.astral.sh/uv/getting-started/installation/).
 
 ## Tools
 
@@ -32,15 +32,15 @@ That's it — no cloning, no venv, no config files.
 
 ## Installation
 
-### Option A — `uvx` (recommended, no cloning required)
+### Option A — `uvx` from GitHub (recommended, no cloning required)
 
 Requires [uv](https://docs.astral.sh/uv/getting-started/installation/) to be installed.
 
 ```bash
-claude mcp add hypothesis -e HYPOTHESIS_API_KEY=your-key-here -- uvx hypothesis-mcp
+claude mcp add hypothesis -e HYPOTHESIS_API_KEY=your-key-here -- uvx --from git+https://github.com/imankgoyal/hypothesis-mcp hypothesis-mcp
 ```
 
-### Option B — `pip` / local install
+### Option B — local install
 
 ```bash
 git clone https://github.com/imankgoyal/hypothesis-mcp
@@ -61,7 +61,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "hypothesis": {
       "command": "uvx",
-      "args": ["hypothesis-mcp"],
+      "args": ["--from", "git+https://github.com/imankgoyal/hypothesis-mcp", "hypothesis-mcp"],
       "env": {
         "HYPOTHESIS_API_KEY": "your-key-here"
       }
