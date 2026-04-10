@@ -70,6 +70,42 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 }
 ```
 
+## Troubleshooting
+
+### `uvx` not found
+
+Claude Code and Claude Desktop launch MCP servers without inheriting your shell PATH, so `uvx` may not be found even if it works in your terminal.
+
+**Fix:** Use the full path to `uvx`. Find it with:
+
+```bash
+which uvx
+```
+
+Then replace `uvx` in the install command with the full path, e.g.:
+
+```bash
+# Claude Code
+claude mcp add hypothesis -e HYPOTHESIS_API_KEY=your-key-here -- /Users/yourname/.local/bin/uvx --from git+https://github.com/imankgoyal/hypothesis-mcp hypothesis-mcp
+```
+
+```json
+// Claude Desktop (claude_desktop_config.json)
+{
+  "mcpServers": {
+    "hypothesis": {
+      "command": "/Users/yourname/.local/bin/uvx",
+      "args": ["--from", "git+https://github.com/imankgoyal/hypothesis-mcp", "hypothesis-mcp"],
+      "env": {
+        "HYPOTHESIS_API_KEY": "your-key-here"
+      }
+    }
+  }
+}
+```
+
+If `uv` is not yet installed, follow the [uv installation guide](https://docs.astral.sh/uv/getting-started/installation/) — `uvx` is included.
+
 ## PDF URL formats
 
 `read_pdf` accepts both formats:
